@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio | Dan Buonavita</title>
+    <link rel="stylesheet" href="styles.css">
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+                "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+            }
+        }
+    </script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="#home" class="logo-link">
+                    <svg id="logo-svg" class="logo-icon" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 288 288">
+                        <path id="logo-path" class="logo-path" d="M223.13,236.65h-65.5l22.72-51.18-32.02-65.77h-65.12l56.58,116.95h-53.02c-7.87,0-15.05-4.49-18.49-11.56l-22.84-46.92c-11.89-25.31,5-55.6,32.7-58.8,1.25-.14,2.61.11,3.76-.05.52-.07.65.21.56-.57L50.18,51.35h65.5l33.22,67.78,65.89.56,31.64,65.77"/>
+                    </svg>
+                    <span class="logo-text">DAN BUONAVITA</span>
+                </a>
+            </div>
+            <ul class="nav-menu" id="navMenu">
+                <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
+                <li class="nav-item"><a href="#work" class="nav-link">Work</a></li>
+                <li class="nav-item"><a href="#skills" class="nav-link">Skills</a></li>
+                <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <!-- Video Background -->
+        <div class="hero-video-container">
+            <video class="hero-video" autoplay muted loop playsinline>
+                <source src="hero-video.mp4" type="video/mp4">
+                <source src="hero-video.webm" type="video/webm">
+            </video>
+            <div class="hero-video-overlay"></div>
+        </div>
+
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    <span class="hero-text">Full-Stack</span>
+                    <span class="hero-text">Mechanical Engineer<span class="cursor">|</span></span>
+                </h1>
+                <p class="hero-subtitle">I design, machine, weld, instrument, and test until it works.
+<strong>No bullshit.</strong> No delays. <strong> Just results. </strong> </p>
+                <div class="hero-cta">
+                    <a href="#work" class="btn btn-primary">View Work</a>
+                    <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section about">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-number">01</span>
+                <h2 class="section-title">About Me</h2>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <p class="large-text">
+                        <strong>I build hardware, not just slide decks.</strong> 
+                        I came up through machine shops, welding booths, CNC cells, assembly lines, and test labs, and I carry that edge into engineering.
+                    </p>
+                    <p>
+                        My value is simple: I can take an idea, design it, fabricate it, instrument it, and test it into reality. If you need someone who can own the entire hardware stack and deliver without excuses, or hand-holding. <strong>I'll get it done.</strong>
+                    </p>
+                </div>
+                <div class="about-stats">
+                    <div class="stat-item">
+                        <div class="stat-number" data-target="50">0</div>
+                        <div class="stat-label">Projects Completed</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" id="experience-counter">0:0:0:0</div>
+                        <div class="stat-label">Experience</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" data-target="30">0</div>
+                        <div class="stat-label">Happy Clients</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Work Section -->
+    <section id="work" class="section work">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-number">02</span>
+                <h2 class="section-title">Featured Work</h2>
+            </div>
+            <div class="work-grid">
+                <article class="work-item" data-category="web">
+                    <div class="work-image">
+                        <div class="work-overlay"></div>
+                        <div class="work-number">01</div>
+                    </div>
+                    <div class="work-info">
+                        <h3 class="work-title">Universal Load Frame</h3>
+                        <p class="work-description">A modular high-capacity load frame engineered 
+                            to handle test configurations beyond the limits of existing UTMs.</p>
+                        <div class="work-tags">
+                            <span class="tag">React</span>
+                            <span class="tag">Node.js</span>
+                            <span class="tag">WebGL</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="work-item" data-category="design">
+                    <div class="work-image">
+                        <div class="work-overlay"></div>
+                        <div class="work-number">02</div>
+                    </div>
+                    <div class="work-info">
+                        <h3 class="work-title">Head-Form alignment tool</h3>
+                        <p class="work-description">A web tool that automates headform alignment and eliminates slow,
+                             manual setup. cutting prep time dramatically and making every test repeatable and traceable.</p>
+                        <div class="work-tags">
+                            <span class="tag">Branding</span>
+                            <span class="tag">UI/UX</span>
+                            <span class="tag">Figma</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="work-item" data-category="web">
+                    <div class="work-image">
+                        <div class="work-overlay"></div>
+                        <div class="work-number">03</div>
+                    </div>
+                    <div class="work-info">
+                        <h3 class="work-title">E-Commerce Platform</h3>
+                        <p class="work-description">Full-stack marketplace with advanced filtering and checkout</p>
+                        <div class="work-tags">
+                            <span class="tag">Next.js</span>
+                            <span class="tag">PostgreSQL</span>
+                            <span class="tag">Stripe</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="work-item" data-category="mobile">
+                    <div class="work-image">
+                        <div class="work-overlay"></div>
+                        <div class="work-number">04</div>
+                    </div>
+                    <div class="work-info">
+                        <h3 class="work-title">Mobile Fitness App</h3>
+                        <p class="work-description">Cross-platform fitness tracking with AI-powered recommendations</p>
+                        <div class="work-tags">
+                            <span class="tag">React Native</span>
+                            <span class="tag">TensorFlow</span>
+                            <span class="tag">Firebase</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="section skills">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-number">03</span>
+                <h2 class="section-title">Skills & Expertise</h2>
+            </div>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3 class="skill-category-title">Design</h3>
+                    <ul class="skill-list">
+                        <li class="skill-item-core">NX/Unigraphics
+                            <span class="skill-note">certified grey beard, user since NX 7.5</span>
+                        </li>
+                        <li class="skill-item-core">SolidWorks</li>
+                        <li class="skill-item-core">GD&T</li>
+                        <li class="skill-item">AutoCAD</li>
+                        <li class="skill-item">FEA/Simulation</li>
+                        <li class="skill-item">Technical Drawings</li>
+                        <li class="skill-item">Tolerance Analysis</li>
+                    </ul>
+                </div>
+
+                <div class="skill-category">
+                    <h3 class="skill-category-title">Manufacturing</h3>
+                    <ul class="skill-list">
+                        <li class="skill-item-core">CNC Machining</li>
+                        <li class="skill-item-core">MIG/TIG Welding</li>
+                        <li class="skill-item-core">Assembly</li>
+                        <li class="skill-item">Manual Machining</li>
+                        <li class="skill-item">Sheet Metal Fabrication</li>
+                        <li class="skill-item">Fixture Design</li>
+                        <li class="skill-item">Process Development</li>
+                    </ul>
+                </div>
+
+                <div class="skill-category">
+                    <h3 class="skill-category-title">Instrumentation</h3>
+                    <ul class="skill-list">
+                        <li class="skill-item-core">Sensors & DAQ</li>
+                        <li class="skill-item-core">Test Fixture Design</li>
+                        <li class="skill-item-core">Data Analysis</li>
+                        <li class="skill-item">Calibration</li>
+                        <li class="skill-item">Signal Processing</li>
+                        <li class="skill-item">Strain Gauges</li>
+                        <li class="skill-item">Load Cells</li>
+                    </ul>
+                </div>
+
+                <div class="skill-category">
+                    <h3 class="skill-category-title">Software</h3>
+                    <ul class="skill-list">
+                        <li class="skill-item-core">Python</li>
+                        <li class="skill-item-core">MATLAB</li>
+                        <li class="skill-item-core">LabVIEW</li>
+                        <li class="skill-item">Arduino</li>
+                        <li class="skill-item">PLCs</li>
+                        <li class="skill-item">Automation</li>
+                        <li class="skill-item">Git</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education and Certifications Section -->
+    <section id="education" class="section education">
+        <div class="container">
+            <div class="section-header" style="display: flex; align-items: center; gap: 1rem;">
+                <span class="section-number">04</span>
+                <h2 class="section-title">Education and Certifications</h2>
+                <button id="music-toggle" class="music-toggle" aria-label="Toggle music" style="display: block;">
+                    <svg class="icon-muted" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M11 5L6 9H2v6h4l5 4V5z"/>
+                        <line x1="23" y1="9" x2="17" y2="15"/>
+                        <line x1="17" y1="9" x2="23" y2="15"/>
+                    </svg>
+                    <svg class="icon-unmuted" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: none;">
+                        <path d="M11 5L6 9H2v6h4l5 4V5z"/>
+                        <path d="M19 9a7 7 0 010 6M15.5 11.5a3 3 0 010 1"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="education-canvas-container">
+                <canvas id="education-canvas"></canvas>
+            </div>
+
+            <!-- Hidden audio element -->
+            <audio id="education-music">
+                <source src="Pomp and Circumstance (Graduation Song) Trap Remix.mp3" type="audio/mpeg">
+            </audio>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section contact">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-number">05</span>
+                <h2 class="section-title">Get In Touch</h2>
+            </div>
+            <div class="contact-content">
+                <div class="contact-text">
+                    <p class="large-text">
+                        Have a project in mind? Let's work together to create something extraordinary.
+                    </p>
+                    <div class="contact-info">
+                        <a href="mailto:your.email@example.com" class="contact-link">
+                            <span class="contact-label">Email</span>
+                            <span class="contact-value">your.email@example.com</span>
+                        </a>
+                        <a href="tel:+1234567890" class="contact-link">
+                            <span class="contact-label">Phone</span>
+                            <span class="contact-value">+1 (234) 567-890</span>
+                        </a>
+                    </div>
+                    <div class="social-links">
+                        <a href="#" class="social-link" aria-label="GitHub">GitHub</a>
+                        <a href="#" class="social-link" aria-label="LinkedIn">LinkedIn</a>
+                        <a href="#" class="social-link" aria-label="Twitter">Twitter</a>
+                        <a href="#" class="social-link" aria-label="Dribbble">Dribbble</a>
+                    </div>
+                </div>
+                <form class="contact-form" id="contactForm">
+                    <div class="form-group">
+                        <input type="text" id="name" name="name" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="email" name="email" placeholder="Your Email" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="message" name="message" rows="6" placeholder="Your Message" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2024 Your Name. All rights reserved.</p>
+                <p class="footer-tagline">Crafted with precision</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script type="module" src="education-scene.js"></script>
+</body>
+</html>
