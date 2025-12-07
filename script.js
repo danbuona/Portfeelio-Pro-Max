@@ -97,12 +97,24 @@ animatedElements.forEach(el => observer.observe(el));
 // Counter Animation for Stats
 // ===========================
 const statNumbers = document.querySelectorAll('.stat-number[data-target]');
+const dollarsSavedCounter = document.getElementById('dollars-saved-counter');
 let countersAnimated = false;
+
+const formatDollars = (value) => {
+    // Format with commas for thousands separators and cents
+    return '$' + value.toLocaleString('en-US', {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+    });
+};
 
 const animateCounters = () => {
     if (countersAnimated) return;
 
     statNumbers.forEach(stat => {
+        // Skip the dollars saved counter as it has its own animation
+        if (stat.id === 'dollars-saved-counter') return;
+
         const target = parseInt(stat.getAttribute('data-target'));
         const duration = 2000; // 2 seconds
         const increment = target / (duration / 16); // 60fps
@@ -132,6 +144,26 @@ const startDate = new Date('2015-01-01T00:00:00'); // Start from January 1, 2015
 let experienceAnimated = false;
 let experienceIntervalId = null;
 
+// ===========================
+// Live Dollars Saved Counter
+// ===========================
+let dollarsSavedAnimated = false;
+let dollarsSavedIntervalId = null;
+const totalDollarsSaved = 45000000.00; // Total saved from 2015 to now (45M)
+const dollarsStartDate = new Date('2015-01-01T00:00:00'); // Same start as experience
+const dollarsEndDate = new Date('2025-12-06T00:00:00'); // Fixed end date for $45M (today's date)
+
+// Calculate total seconds from start to the fixed end date
+const totalSecondsElapsed = (dollarsEndDate - dollarsStartDate) / 1000;
+const dollarsPerSecond = totalDollarsSaved / totalSecondsElapsed; // Fixed rate based on $45M / total time
+
+// Calculate current dollars saved based on time elapsed since 2015
+const calculateCurrentDollarsSaved = () => {
+    const now = new Date();
+    const secondsElapsed = (now - dollarsStartDate) / 1000;
+    return secondsElapsed * dollarsPerSecond;
+};
+
 const calculateExperience = () => {
     const now = new Date();
     const diff = now - startDate;
@@ -153,9 +185,80 @@ const updateExperienceCounter = (currentYears, currentDays, currentMinutes, curr
     }
 };
 
+const animateDollarsSavedCounter = () => {
+    if (dollarsSavedAnimated) return;
+    dollarsSavedAnimated = true;
+
+    // Calculate the current dollars saved based on time elapsed since 2015
+    const targetDollars = calculateCurrentDollarsSaved();
+
+    let currentDollars = 0;
+    const duration = 2000; // 2 seconds to animate to current value
+    const steps = 120; // More steps for smoother animation
+    const stepDuration = duration / steps;
+    const increment = targetDollars / steps;
+
+    let currentStep = 0;
+
+    const animate = () => {
+        currentStep++;
+        currentDollars += increment;
+
+        if (dollarsSavedCounter) {
+            dollarsSavedCounter.textContent = formatDollars(currentDollars);
+        }
+
+        if (currentStep < steps) {
+            setTimeout(animate, stepDuration);
+        } else {
+            // After animation completes, start continuous live updating from the calculated value
+            currentDollars = targetDollars;
+            const dollarsPerFrame = dollarsPerSecond / 60; // 60fps animation
+
+            const updateLiveContinuous = () => {
+                currentDollars += dollarsPerFrame;
+
+                if (dollarsSavedCounter) {
+                    dollarsSavedCounter.textContent = formatDollars(currentDollars);
+                }
+
+                dollarsSavedIntervalId = requestAnimationFrame(updateLiveContinuous);
+            };
+
+            updateLiveContinuous();
+        }
+    };
+
+    animate();
+};
+
 const animateExperienceCounter = () => {
     if (experienceAnimated) return;
     experienceAnimated = true;
+
+    // Sync font sizes - make experience counter the master
+    const syncStatFontSizes = () => {
+        if (experienceCounter) {
+            const counterStyles = window.getComputedStyle(experienceCounter);
+            const fontSize = counterStyles.fontSize;
+
+            // Apply the same font size to all other stat numbers
+            statNumbers.forEach(stat => {
+                stat.style.fontSize = fontSize;
+            });
+        }
+    };
+
+    // Initial sync
+    syncStatFontSizes();
+
+    // Sync on resize to handle responsive changes
+    let resizeTimeout;
+    const handleResize = () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(syncStatFontSizes, 100);
+    };
+    window.addEventListener('resize', handleResize);
 
     const target = calculateExperience();
     const duration = 2000; // 2 seconds to animate
@@ -199,6 +302,7 @@ if (statsSection) {
             if (entry.isIntersecting) {
                 animateCounters();
                 animateExperienceCounter();
+                animateDollarsSavedCounter();
             }
         });
     }, { threshold: 0.5 });
@@ -497,6 +601,11 @@ class TextScramble {
 // Apply scramble effect to hero title on load
 const heroTexts = document.querySelectorAll('.hero-text');
 if (heroTexts.length > 0) {
+    // Lock the entire hero content height to prevent bouncing
+    const heroContent = document.querySelector('.hero-content');
+    const heroContentHeight = heroContent.offsetHeight;
+    heroContent.style.minHeight = heroContentHeight + 'px';
+
     heroTexts.forEach((textEl, index) => {
         const fx = new TextScramble(textEl);
         // Store the original HTML to preserve the cursor span
@@ -506,7 +615,9 @@ if (heroTexts.length > 0) {
         // Lock the height before clearing text to prevent jitter
         const originalHeight = textEl.offsetHeight;
         textEl.style.minHeight = originalHeight + 'px';
+        textEl.style.height = originalHeight + 'px';
         textEl.style.display = 'block';
+        textEl.style.overflow = 'hidden';
 
         // Clear text initially
         textEl.innerText = '';
@@ -518,10 +629,17 @@ if (heroTexts.length > 0) {
                 if (originalHTML.includes('cursor')) {
                     textEl.innerHTML = originalHTML;
                 }
-                // Remove height lock after animation completes
+                // Remove height lock after animation completes with longer delay
                 setTimeout(() => {
                     textEl.style.minHeight = '';
-                }, 100);
+                    textEl.style.height = '';
+                    textEl.style.overflow = '';
+
+                    // Remove hero content height lock after all animations complete
+                    if (index === heroTexts.length - 1) {
+                        heroContent.style.minHeight = '';
+                    }
+                }, 300);
             });
         }, 300 + (index * 400));
     });
@@ -559,9 +677,19 @@ const scrambleObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting && !entry.target.classList.contains('scrambled')) {
             entry.target.classList.add('scrambled');
+
+            // Lock height to prevent jitter during animation
+            const currentHeight = entry.target.offsetHeight;
+            entry.target.style.minHeight = currentHeight + 'px';
+
             const fx = new TextScramble(entry.target);
             const originalText = originalTexts.get(entry.target);
-            fx.setText(originalText);
+            fx.setText(originalText).then(() => {
+                // Remove height lock after animation completes
+                setTimeout(() => {
+                    entry.target.style.minHeight = '';
+                }, 100);
+            });
         }
     });
 }, scrambleObserverOptions);
@@ -569,6 +697,47 @@ const scrambleObserver = new IntersectionObserver((entries) => {
 // Observe only section titles
 scrambleElements.forEach(el => {
     scrambleObserver.observe(el);
+});
+
+// ===========================
+// Metrics Info Modal
+// ===========================
+const metricsInfoButton = document.getElementById('metrics-info-button');
+const metricsModal = document.getElementById('metrics-modal');
+const modalCloseBtn = document.getElementById('modal-close-btn');
+
+// Open modal
+if (metricsInfoButton) {
+    metricsInfoButton.addEventListener('click', () => {
+        metricsModal.classList.add('active');
+        document.body.style.overflow = 'hidden'; // Prevent background scrolling
+    });
+}
+
+// Close modal when clicking close button
+if (modalCloseBtn) {
+    modalCloseBtn.addEventListener('click', () => {
+        metricsModal.classList.remove('active');
+        document.body.style.overflow = ''; // Restore scrolling
+    });
+}
+
+// Close modal when clicking outside the content
+if (metricsModal) {
+    metricsModal.addEventListener('click', (e) => {
+        if (e.target === metricsModal) {
+            metricsModal.classList.remove('active');
+            document.body.style.overflow = ''; // Restore scrolling
+        }
+    });
+}
+
+// Close modal with Escape key
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && metricsModal.classList.contains('active')) {
+        metricsModal.classList.remove('active');
+        document.body.style.overflow = ''; // Restore scrolling
+    }
 });
 
 // ===========================

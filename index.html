@@ -3,8 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
     <title>Portfolio | Dan Buonavita</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css?v=1.1.0">
     <script type="importmap">
         {
             "imports": {
@@ -84,21 +87,27 @@
                         I came up through machine shops, welding booths, CNC cells, assembly lines, and test labs, and I carry that edge into engineering.
                     </p>
                     <p>
-                        My value is simple: I can take an idea, design it, fabricate it, instrument it, and test it into reality. If you need someone who can own the entire hardware stack and deliver without excuses, or hand-holding. <strong>I'll get it done.</strong>
+                        My value is simple: I can take an idea, design it, fabricate it, instrument it, and test it into reality. If you need someone who can own <strong>the entire hardware stack</strong> and deliver without excuses, or hand-holding. <strong>I'll get it done.</strong>
                     </p>
                 </div>
                 <div class="about-stats">
-                    <div class="stat-item">
-                        <div class="stat-number" data-target="50">0</div>
-                        <div class="stat-label">Projects Completed</div>
-                    </div>
                     <div class="stat-item">
                         <div class="stat-number" id="experience-counter">0:0:0:0</div>
                         <div class="stat-label">Experience</div>
                     </div>
                     <div class="stat-item">
+                        <div class="stat-number" id="dollars-saved-counter" data-target="4500000">$0</div>
+                        <div class="stat-label">Dollars Saved</div>
+                    </div>
+                    <div class="stat-item">
                         <div class="stat-number" data-target="30">0</div>
-                        <div class="stat-label">Happy Clients</div>
+                        <div class="stat-label">Industries Served</div>
+                    </div>
+                    <div class="stats-info">
+                        <button class="info-button" id="metrics-info-button" aria-label="Information about metrics">
+                            <span class="info-icon">i</span>
+                        </button>
+                        <span class="info-text">How are these metrics calculated?</span>
                     </div>
                 </div>
             </div>
@@ -321,6 +330,31 @@
         </div>
     </section>
 
+    <!-- Metrics Info Modal -->
+    <div class="modal-overlay" id="metrics-modal">
+        <div class="modal-content">
+            <button class="modal-close" id="modal-close-btn" aria-label="Close modal">×</button>
+            <h3 class="modal-title">How are these metrics calculated?</h3>
+            <div class="modal-body">
+                <div class="metric-explanation">
+                    <h4>Experience</h4>
+                    <p>Real-time calculation since January 2015, showing years, days, minutes, and seconds of professional engineering experience.</p>
+                </div>
+                <div class="metric-explanation">
+                    <h4>Dollars Saved</h4>
+                    <p>Cumulative cost savings achieved through design optimization, process improvements, and efficient engineering solutions across all projects.</p>
+                </div>
+                <div class="metric-explanation">
+                    <h4>Industries Served</h4>
+                    <p>Total number of unique industry sectors worked with, including automotive, aerospace, medical devices, consumer products, and more.</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <strong>No bullshit.</strong> <span class="arrow">→</span> <a href="#" class="metrics-link" id="metrics-data-link">View Live Data</a>
+            </div>
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
@@ -331,7 +365,7 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
-    <script type="module" src="education-scene.js"></script>
+    <script src="script.js?v=1.0.3"></script>
+    <script type="module" src="education-scene.js?v=1.0.0"></script>
 </body>
 </html>

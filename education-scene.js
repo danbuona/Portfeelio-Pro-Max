@@ -19,12 +19,15 @@ camera = new THREE.PerspectiveCamera(
     0.1,
     1000
 );
-camera.position.set(0, 0, 2.5); // Zoomed in closer
+camera.position.set(0, 0, 3.2); // Zoomed out to prevent clipping at rotation extents
 camera.lookAt(0, 0, 0);
 
 // Create renderer with transparent background
 renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
-renderer.setSize(container.clientWidth, container.clientHeight);
+// Force canvas to match container dimensions
+const width = container.clientWidth;
+const height = container.clientHeight;
+renderer.setSize(width, height, false); // false prevents setting style
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
@@ -206,13 +209,18 @@ musicToggle.addEventListener('click', () => {
 // ===========================
 // Window Resize Handler
 // ===========================
-window.addEventListener('resize', () => {
+function handleResize() {
     const width = container.clientWidth;
     const height = container.clientHeight;
 
     camera.aspect = width / height;
     camera.updateProjectionMatrix();
 
-    renderer.setSize(width, height);
+    renderer.setSize(width, height, false); // false prevents setting style
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-});
+}
+
+window.addEventListener('resize', handleResize);
+
+// Call once on load to ensure proper initial sizing
+handleResize();
