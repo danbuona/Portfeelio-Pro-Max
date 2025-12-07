@@ -504,7 +504,7 @@ p {
 }
 
 .stat-number {
-    font-size: 3.5rem;
+    font-size: clamp(2rem, 5vw, 3.5rem);
     font-weight: 700;
     color: var(--color-text);
     line-height: 1;
@@ -512,10 +512,12 @@ p {
 }
 
 #experience-counter {
-    font-size: 3.5rem;
+    font-size: clamp(1.75rem, 5vw, 3.5rem);
     display: inline-block;
-    min-width: 100%;
+    max-width: 100%;
     font-variant-numeric: tabular-nums;
+    word-break: break-all;
+    overflow-wrap: break-word;
 }
 
 .counter-unit {
@@ -1064,7 +1066,19 @@ p {
     }
 
     .stat-number {
-        font-size: 2.5rem;
+        font-size: clamp(1.5rem, 8vw, 2.5rem);
+    }
+
+    #experience-counter {
+        font-size: clamp(1.25rem, 7vw, 2.5rem);
+    }
+
+    .about-stats {
+        gap: 2rem;
+    }
+
+    .stat-item {
+        padding-left: 1rem;
     }
 
     .work-image {
