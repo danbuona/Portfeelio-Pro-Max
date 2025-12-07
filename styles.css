@@ -330,9 +330,9 @@ p {
 }
 
 .cursor {
-    display: inline-block;
+    display: inline;
     animation: blink 0.8s step-end infinite;
-    margin-left: 4px;
+    margin-left: 2px;
     color: var(--color-accent);
 }
 
@@ -1030,6 +1030,14 @@ p {
         flex-direction: column;
     }
 
+    .hero-title {
+        margin-bottom: 1.25rem;
+    }
+
+    .hero-text {
+        line-height: 1.1;
+    }
+
     .btn {
         width: 100%;
         text-align: center;
@@ -1063,6 +1071,26 @@ p {
 
     .nav-container {
         padding: 1.25rem 1.5rem;
+    }
+
+    .hero-title {
+        margin-bottom: 1rem;
+    }
+
+    .hero-text {
+        font-size: clamp(2rem, 10vw, 3.5rem);
+        line-height: 1.15;
+        word-spacing: -0.05em;
+    }
+
+    .cursor {
+        margin-left: 1px;
+        font-size: 0.95em;
+    }
+
+    .hero-subtitle {
+        font-size: clamp(0.9rem, 3.5vw, 1.3rem);
+        margin-bottom: 2rem;
     }
 
     .stat-number {

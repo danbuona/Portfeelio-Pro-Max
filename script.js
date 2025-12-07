@@ -527,6 +527,28 @@ if (heroTexts.length > 0) {
     });
 }
 
+// Initialize section titles with scrambled text immediately
+const scrambleElements = document.querySelectorAll('.section-title');
+const originalTexts = new Map(); // Store original text for each element
+
+// Function to generate scrambled text
+const generateScrambledText = (length) => {
+    const chars = '!<>-_\\/[]{}—=+*^?#________';
+    let scrambled = '';
+    for (let i = 0; i < length; i++) {
+        scrambled += chars[Math.floor(Math.random() * chars.length)];
+    }
+    return scrambled;
+};
+
+// Initialize all section titles with scrambled text on page load
+scrambleElements.forEach(el => {
+    const originalText = el.innerText;
+    originalTexts.set(el, originalText);
+    // Replace text with scrambled version immediately
+    el.innerHTML = `<span class="dud">${generateScrambledText(originalText.length)}</span>`;
+});
+
 // Apply scramble effect to section titles when they come into view
 const scrambleObserverOptions = {
     threshold: 0.5,
@@ -538,14 +560,13 @@ const scrambleObserver = new IntersectionObserver((entries) => {
         if (entry.isIntersecting && !entry.target.classList.contains('scrambled')) {
             entry.target.classList.add('scrambled');
             const fx = new TextScramble(entry.target);
-            const originalText = entry.target.innerText;
+            const originalText = originalTexts.get(entry.target);
             fx.setText(originalText);
         }
     });
 }, scrambleObserverOptions);
 
-// Observe only section titles (reduced from all text elements)
-const scrambleElements = document.querySelectorAll('.section-title');
+// Observe only section titles
 scrambleElements.forEach(el => {
     scrambleObserver.observe(el);
 });
