@@ -197,18 +197,26 @@
             <div class="section-header">
                 <span class="section-number">03</span>
                 <h2 class="section-title">Skills & Expertise</h2>
+<button class="skills-back-btn" id="skills-back-btn" aria-label="Go back to skill cards">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M19 12H5M12 19l-7-7 7-7"/>
+                    </svg>
+                </button>
             </div>
-            <div class="skills-grid">
+
+            <!-- Skills Grid Wrapper -->
+            <div class="skills-grid-wrapper">
+            <!-- Background Skills Grid - Useful -->
+            <div class="skills-grid skills-useful active">
                 <div class="skill-category">
                     <h3 class="skill-category-title">Design</h3>
                     <ul class="skill-list">
                         <li class="skill-item-core">NX/Unigraphics
                             <span class="skill-note">certified grey beard, user since NX 7.5</span>
                         </li>
-                        <li class="skill-item-core">SolidWorks</li>
                         <li class="skill-item-core">GD&T</li>
-                        <li class="skill-item">AutoCAD</li>
-                        <li class="skill-item">FEA/Simulation</li>
+                        <li class="skill-item">NX Nastran/Simcenter</li>
+                        <li class="skill-item">NASGRO</li>
                         <li class="skill-item">Technical Drawings</li>
                         <li class="skill-item">Tolerance Analysis</li>
                     </ul>
@@ -252,6 +260,75 @@
                         <li class="skill-item">Git</li>
                     </ul>
                 </div>
+            </div>
+
+            <!-- Background Skills Grid - Useless -->
+            <div class="skills-grid skills-useless">
+                <div class="skill-category">
+                    <h3 class="skill-category-title">3D & Motion</h3>
+                    <ul class="skill-list">
+                        <li class="skill-item-core">Blender</li>
+                        <li class="skill-item-core">Spline</li>
+                        <li class="skill-item-core">KeyShot</li>
+                        <li class="skill-item">Unity</li>
+                        <li class="skill-item">Cinema 4D</li>
+                        <li class="skill-item">After Effects</li>
+                        <li class="skill-item">Substance Painter</li>
+                    </ul>
+                </div>
+
+                <div class="skill-category">
+                    <h3 class="skill-category-title">Design & Illustration</h3>
+                    <ul class="skill-list">
+                        <li class="skill-item-core">Figma</li>
+                        <li class="skill-item-core">Adobe Illustrator</li>
+                        <li class="skill-item-core">Adobe Photoshop</li>
+                        <li class="skill-item">Sketch</li>
+                        <li class="skill-item">InDesign</li>
+                        <li class="skill-item">Procreate</li>
+                        <li class="skill-item">Canva</li>
+                    </ul>
+                </div>
+
+                <div class="skill-category">
+                    <h3 class="skill-category-title">Video & Audio</h3>
+                    <ul class="skill-list">
+                        <li class="skill-item-core">Adobe Premiere</li>
+                        <li class="skill-item-core">Final Cut Pro</li>
+                        <li class="skill-item-core">CapCut</li>
+                        <li class="skill-item">Audition</li>
+                        <li class="skill-item">Logic Pro</li>
+                        <li class="skill-item">OBS Studio</li>
+                        <li class="skill-item">Lightroom</li>
+                    </ul>
+                </div>
+
+                <div class="skill-category">
+                    <h3 class="skill-category-title">Tinkering</h3>
+                    <ul class="skill-list">
+                        <li class="skill-item-core">ArduPilot</li>
+                        <li class="skill-item-core">Wolfram Mathematica</li>
+                        <li class="skill-item-core">Raspberry Pi</li>
+                        <li class="skill-item">Home Assistant</li>
+                        <li class="skill-item">3D Printing</li>
+                        <li class="skill-item">Drone Building</li>
+                        <li class="skill-item">Electronics Repair</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Foreground Cards -->
+            <div class="skills-cards-container">
+                <div class="skill-card" data-skills="useful">
+                    <h3 class="skill-card-title">Useful Skills</h3>
+                    <p class="skill-card-subtitle">skills that pay the bills</p>
+                </div>
+
+                <div class="skill-card" data-skills="useless">
+                    <h3 class="skill-card-title">Useless Skills</h3>
+                    <p class="skill-card-subtitle">skills that don't pay the bills, but make life interesting</p>
+                </div>
+            </div>
             </div>
         </div>
     </section>

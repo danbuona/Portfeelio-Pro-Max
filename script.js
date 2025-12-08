@@ -741,6 +741,59 @@ document.addEventListener('keydown', (e) => {
 });
 
 // ===========================
+// Skills Card Toggle & Hover
+// ===========================
+const skillCards = document.querySelectorAll('.skill-card');
+const skillsUseful = document.querySelector('.skills-useful');
+const skillsUseless = document.querySelector('.skills-useless');
+
+// Get the currently active grid
+const getActiveGrid = () => document.querySelector('.skills-grid.active');
+
+// Switch skills content on hover
+skillCards.forEach(card => {
+    const skillType = card.dataset.skills;
+
+    card.addEventListener('mouseenter', () => {
+        if (skillType === 'useful') {
+            skillsUseless.classList.remove('active');
+            skillsUseful.classList.add('active');
+        } else if (skillType === 'useless') {
+            skillsUseful.classList.remove('active');
+            skillsUseless.classList.add('active');
+        }
+    });
+
+    // Click to fade out both cards and bring skills into focus
+    card.addEventListener('click', () => {
+        const activeGrid = getActiveGrid();
+        // Fade out both cards and bring grid into focus
+        skillCards.forEach(c => c.classList.add('faded-out'));
+        if (activeGrid) activeGrid.classList.add('in-focus');
+        // Change title based on which card was clicked, show arrow when done
+        const newTitle = skillType === 'useful' ? 'Useful Skills' : 'Useless Skills';
+        skillsTitleScrambler.setText(newTitle).then(() => {
+            setTimeout(() => {
+                skillsBackBtn.classList.add('visible');
+            }, 300);
+        });
+    });
+});
+
+// Back button to restore cards
+const skillsBackBtn = document.getElementById('skills-back-btn');
+const skillsTitleScrambler = new TextScramble(document.querySelector('#skills .section-title'));
+
+skillsBackBtn.addEventListener('click', () => {
+    const activeGrid = getActiveGrid();
+    skillCards.forEach(c => c.classList.remove('faded-out'));
+    if (activeGrid) activeGrid.classList.remove('in-focus');
+    skillsBackBtn.classList.remove('visible');
+    // Restore original title
+    skillsTitleScrambler.setText('Skills & Expertise');
+});
+
+// ===========================
 // Console Easter Egg
 // ===========================
 console.log('%cWelcome to my portfolio!', 'color: #dff140; font-size: 20px; font-weight: bold;');
