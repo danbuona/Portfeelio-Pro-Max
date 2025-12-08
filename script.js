@@ -775,6 +775,8 @@ skillCards.forEach(card => {
         skillsTitleScrambler.setText(newTitle).then(() => {
             setTimeout(() => {
                 skillsBackBtn.classList.add('visible');
+                // Show scroll-to-top button on mobile
+                skillsScrollTop.classList.add('visible');
             }, 300);
         });
     });
@@ -782,6 +784,7 @@ skillCards.forEach(card => {
 
 // Back button to restore cards
 const skillsBackBtn = document.getElementById('skills-back-btn');
+const skillsScrollTop = document.getElementById('skills-scroll-top');
 const skillsTitleScrambler = new TextScramble(document.querySelector('#skills .section-title'));
 
 skillsBackBtn.addEventListener('click', () => {
@@ -789,9 +792,19 @@ skillsBackBtn.addEventListener('click', () => {
     skillCards.forEach(c => c.classList.remove('faded-out'));
     if (activeGrid) activeGrid.classList.remove('in-focus');
     skillsBackBtn.classList.remove('visible');
+    skillsScrollTop.classList.remove('visible');
     // Restore original title
     skillsTitleScrambler.setText('Skills & Expertise');
 });
+
+// Mobile scroll to top of skills section
+skillsScrollTop.addEventListener('click', () => {
+    const skillsSection = document.getElementById('skills');
+    const offset = 60; // Padding from top
+    const targetPosition = skillsSection.offsetTop - offset;
+    window.scrollTo({ top: targetPosition, behavior: 'smooth' });
+});
+
 
 // ===========================
 // Console Easter Egg
